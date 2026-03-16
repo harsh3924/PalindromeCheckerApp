@@ -1,0 +1,79 @@
+class Node {
+    char data;
+    Node next;
+
+    Node(char data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class UseCase8PalindromeCheckerApp {
+
+    // Function to reverse linked list
+    public static Node reverse(Node head) {
+        Node prev = null;
+        Node current = head;
+        Node next = null;
+
+        while(current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+
+        return prev;
+    }
+
+    public static void main(String[] args) {
+
+        String word = "radar";
+
+        // Convert string to linked list
+        Node head = new Node(word.charAt(0));
+        Node current = head;
+
+        for(int i = 1; i < word.length(); i++) {
+            current.next = new Node(word.charAt(i));
+            current = current.next;
+        }
+
+        // Find middle using fast and slow pointers
+        Node slow = head;
+        Node fast = head;
+
+        while(fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // Reverse second half
+        Node secondHalf = reverse(slow);
+
+        Node firstHalf = head;
+
+        boolean isPalindrome = true;
+
+        // Compare both halves
+        while(secondHalf != null) {
+
+            if(firstHalf.data != secondHalf.data) {
+                isPalindrome = false;
+                break;
+            }
+
+            firstHalf = firstHalf.next;
+            secondHalf = secondHalf.next;
+        }
+
+        // Print result
+        if(isPalindrome) {
+            System.out.println("The word \"" + word + "\" is a Palindrome.");
+        } 
+        else {
+            System.out.println("The word \"" + word + "\" is NOT a Palindrome.");
+        }
+
+    }
+}
