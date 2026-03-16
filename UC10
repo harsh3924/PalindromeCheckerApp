@@ -1,0 +1,39 @@
+public class UseCase10PalindromeCheckerApp {
+
+    // Method to check palindrome
+    public static boolean isPalindrome(String str) {
+
+        int start = 0;
+        int end = str.length() - 1;
+
+        while(start < end) {
+
+            if(str.charAt(start) != str.charAt(end)) {
+                return false;
+            }
+
+            start++;
+            end--;
+        }
+
+        return true;
+    }
+
+    public static void main(String[] args) {
+
+        String sentence = "Never Odd Or Even";
+
+        // Normalize string: remove spaces and convert to lowercase
+        String normalized = sentence.replaceAll("\\s+", "").toLowerCase();
+
+        boolean result = isPalindrome(normalized);
+
+        if(result) {
+            System.out.println("The sentence \"" + sentence + "\" is a Palindrome.");
+        }
+        else {
+            System.out.println("The sentence \"" + sentence + "\" is NOT a Palindrome.");
+        }
+
+    }
+}
