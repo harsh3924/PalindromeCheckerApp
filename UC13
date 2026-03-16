@@ -1,0 +1,56 @@
+public class UseCase13PalindromeCheckerApp {
+
+    // Iterative method
+    public static boolean iterativePalindrome(String str) {
+
+        int start = 0;
+        int end = str.length() - 1;
+
+        while(start < end) {
+
+            if(str.charAt(start) != str.charAt(end)) {
+                return false;
+            }
+
+            start++;
+            end--;
+        }
+
+        return true;
+    }
+
+    // Recursive method
+    public static boolean recursivePalindrome(String str, int start, int end) {
+
+        if(start >= end) {
+            return true;
+        }
+
+        if(str.charAt(start) != str.charAt(end)) {
+            return false;
+        }
+
+        return recursivePalindrome(str, start + 1, end - 1);
+    }
+
+    public static void main(String[] args) {
+
+        String word = "madam";
+
+        // Iterative performance
+        long startIter = System.nanoTime();
+        boolean result1 = iterativePalindrome(word);
+        long endIter = System.nanoTime();
+
+        // Recursive performance
+        long startRec = System.nanoTime();
+        boolean result2 = recursivePalindrome(word, 0, word.length() - 1);
+        long endRec = System.nanoTime();
+
+        System.out.println("Iterative Result: " + result1);
+        System.out.println("Iterative Time: " + (endIter - startIter) + " ns");
+
+        System.out.println("Recursive Result: " + result2);
+        System.out.println("Recursive Time: " + (endRec - startRec) + " ns");
+    }
+}
